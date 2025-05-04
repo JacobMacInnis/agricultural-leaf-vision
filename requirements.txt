@@ -1,0 +1,7 @@
+tensorflow
+keras
+fastapi
+uvicorn
+python-multipart
+pillow
+google-cloud-aiplatform
