@@ -4,7 +4,7 @@ from pathlib import Path
 
 # Load your trained model
 MODEL_DIR = Path("models/best_model_saved.keras")
-EXPORT_DIR = Path("models/vertex_ready_model")
+EXPORT_DIR = Path("models/ready_model")
 
 # Load the original trained model
 base_model = keras.models.load_model(MODEL_DIR)
@@ -40,4 +40,4 @@ tf.saved_model.save(
     signatures={"serving_default": serve_fn}
 )
 
-print(f"✅ Vertex-ready model saved at {EXPORT_DIR}")
+print(f"✅ model saved at {EXPORT_DIR}")

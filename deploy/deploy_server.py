@@ -1,12 +1,13 @@
 import subprocess
 
 PROJECT_ID = "agricultural-leaf-vision"
-REGION = "us-central1"
+REGION = "us-east1"
 SERVICE_NAME = "agricultural-leaf-vision-backend"
-ARTIFACT_REPO = "gcr.io"  # Using GCR (easy for now)
+REPO_NAME = "agricultural-leaf-vision-repo"
+# ARTIFACT_REPO = "gcr.io"
 
 # Image name
-IMAGE_NAME = f"{ARTIFACT_REPO}/{PROJECT_ID}/{SERVICE_NAME}"
+IMAGE_NAME = f"{REGION}-docker.pkg.dev/{PROJECT_ID}/{REPO_NAME}/{SERVICE_NAME}"
 
 def run_command(command):
     result = subprocess.run(command, shell=True, check=True, text=True)
@@ -14,7 +15,7 @@ def run_command(command):
 
 # Build Docker image
 print("🔨 Building Docker image...")
-run_command(f"docker build -t {IMAGE_NAME} ./backend")
+run_command(f"docker build --platform=linux/amd64 -t {IMAGE_NAME} .")
 
 # Push Docker image
 print("🚀 Pushing Docker image to GCR...")
@@ -26,6 +27,7 @@ run_command(
     f"gcloud run deploy {SERVICE_NAME} "
     f"--image {IMAGE_NAME} "
     f"--region {REGION} "
+    f"--memory 1Gi "
     f"--platform managed "
     f"--allow-unauthenticated"
 )
