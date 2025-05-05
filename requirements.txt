@@ -5,3 +5,6 @@ uvicorn
 python-multipart
 pillow
 google-cloud-aiplatform
+numpy
+requests
+python-dotenv
