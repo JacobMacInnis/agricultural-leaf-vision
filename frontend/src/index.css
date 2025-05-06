@@ -1,0 +1,269 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #333;
+  background-color: #f9f9f9;
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Layout / Container */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.divider {
+  width: 100%;
+  margin: 3rem 0;
+  border-top: 1px solid #ccc;
+}
+
+/* Typography */
+a {
+  font-weight: 500;
+  color: #4caf50;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #45a049;
+}
+
+/* Buttons */
+.button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  text-align: center;
+  width: 100%;
+  max-width: 750px;
+}
+
+/* Upload Area */
+.upload-area {
+  max-width: 750px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+input[type="file"] {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.preview-box {
+  margin-top: 1rem;
+  width: 400px;
+  height: 400px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.loading-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #fff4e5;
+  border: 1px solid #ffcc80;
+  border-radius: 8px;
+  color: #ff9800;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Prediction */
+.prediction-result {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #444;
+  text-align: center;
+}
+
+/* Model Performance Plots */
+.model-performance {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.model-performance h2 {
+  margin-bottom: 1rem;
+}
+
+.model-performance img {
+  margin: 0.5rem;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Footer */
+.footer,
+footer {
+  text-align: center;
+  color: #999;
+  font-size: 0.9rem;
+  margin-top: 4rem;
+}
+
+/* Model Info Section */
+.model-info-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 4rem;
+}
+
+.model-info-card h2 {
+  margin-bottom: 1rem;
+}
+
+.model-info-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.model-info-card li {
+  margin-bottom: 0.5rem;
+}
+
+/* Plots Grid */
+.plots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Example Images */
+.example-images {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.example-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.example-thumbnail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+}
+
+.example-thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.example-thumbnail:hover {
+  transform: scale(1.05);
+  border-color: #4caf50;
+}
+
+.example-label {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+/* Header Section */
+.intro-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.main-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.poc-notice {
+  font-size: 1rem;
+  color: #ff9800;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.trained-on {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.warning {
+  font-size: 0.9rem;
+  color: #e53935;
+  margin-top: 0.5rem;
+}

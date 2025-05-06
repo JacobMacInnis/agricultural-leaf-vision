@@ -1,10 +1,23 @@
+# Core frameworks
+fastapi
 tensorflow
 keras
-fastapi
 uvicorn
-python-multipart
-pillow
-google-cloud-aiplatform
+
+# Supporting libraries
 numpy
+pillow
+python-multipart
 requests
+
+# Environment and config
 python-dotenv
+
+# Plotting and visualization
+matplotlib
+seaborn
+
+# ML utilities
+scikit-learn
+google-cloud-aiplatform
+
