@@ -4,7 +4,7 @@ import pickle
 
 
 # Import your data loader and model builder
-from data_loader import train_ds, val_ds
+from ml.preprocessing.data_loader import train_ds, val_ds
 from model_builder import build_model
 
 # Settings
@@ -40,8 +40,8 @@ early_stopping_cb = tf.keras.callbacks.EarlyStopping(
 
 # Train the model
 history = model.fit(
-    # train_ds,
-    small_train_ds,
+    train_ds,
+    # small_train_ds,
     validation_data=val_ds,
     epochs=EPOCHS,
     callbacks=[checkpoint_cb, early_stopping_cb]
