@@ -1,35 +1,46 @@
 import tensorflow as tf
-from tensorflow.keras import layers, models
-from tensorflow.keras.applications import EfficientNetB0
 
 # Settings
 IMG_HEIGHT = 224
 IMG_WIDTH = 224
-NUM_CLASSES = 13
+NUM_CLASSES = 8
 
 def build_model():
-    # Load EfficientNetB0 without top layers (include_top=False)
-    base_model = EfficientNetB0(
-        input_shape=(IMG_HEIGHT, IMG_WIDTH, 3),
+
+    # Data Augmentation block
+    data_augmentation = tf.keras.Sequential([
+        tf.keras.layers.RandomFlip("horizontal_and_vertical"),
+        tf.keras.layers.RandomRotation(0.4),
+        tf.keras.layers.RandomZoom(0.3),
+        tf.keras.layers.RandomBrightness(0.2),
+    ], name="data_augmentation")
+
+    # Load EfficientNetB0 without top layers
+    base_model = tf.keras.applications.EfficientNetB2(
         include_top=False,
-        weights="imagenet"
+        input_shape=(IMG_HEIGHT, IMG_WIDTH, 3),
+        weights="imagenet",
+        pooling=None
     )
+    base_model.trainable = False  # Freeze it
     
-    # Freeze the base model
-    base_model.trainable = False
+    # Build the full model
+    inputs = tf.keras.Input(shape=(IMG_HEIGHT, IMG_WIDTH, 3), name="input_layer")
+    x = data_augmentation(inputs)
+    x = tf.keras.applications.efficientnet.preprocess_input(x)
+    x = base_model(x, training=False)
+    x = tf.keras.layers.GlobalAveragePooling2D()(x)
+    x = tf.keras.layers.Dropout(0.4)(x)
+    x = tf.keras.layers.Dense(512, activation="relu")(x)
+    x = tf.keras.layers.Dropout(0.4)(x)
+    x = tf.keras.layers.Dense(256, activation="relu")(x)
+    x = tf.keras.layers.Dropout(0.3)(x)
+    outputs = tf.keras.layers.Dense(NUM_CLASSES, activation="softmax")(x)
 
-    # Create the full model
-    inputs = tf.keras.Input(shape=(IMG_HEIGHT, IMG_WIDTH, 3))
-    x = base_model(inputs, training=False)  # Important: set training=False
-    x = layers.GlobalAveragePooling2D()(x)  # Reduces tensor size
-    x = layers.Dropout(0.2)(x)  # Regularization
-    outputs = layers.Dense(NUM_CLASSES, activation="softmax")(x)
+    model = tf.keras.Model(inputs, outputs, name="EfficientNetB0_Leaf_Classifier")
 
-    model = models.Model(inputs, outputs)
-
-    # Compile the model
     model.compile(
-        optimizer=tf.keras.optimizers.Adam(),
+        optimizer=tf.keras.optimizers.Adam(learning_rate=1e-4),
         loss="categorical_crossentropy",
         metrics=["accuracy"]
     )

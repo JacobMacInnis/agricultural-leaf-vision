@@ -6,15 +6,15 @@ df = pd.read_csv(input_path)
 
 # Cleaning functions
 def extract_name(species_label):
-    # Plant name before first underscore
-    return species_label.split('_')[0]
+    species_label = species_label.replace(',', '')
+    return species_label.split('_')[0].strip()
 
 def determine_health(species_label):
     # 1 if healthy, 0 otherwise
     return 1 if 'healthy' in species_label.lower() else 0
 
 def extract_disease(species_label):
-    # If healthy, return 'none', otherwise extract disease name after first underscore
+    species_label = species_label.replace(',', '')  # Add this line also
     if 'healthy' in species_label.lower():
         return 'none'
     parts = species_label.split('_')

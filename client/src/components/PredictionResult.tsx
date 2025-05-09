@@ -8,7 +8,7 @@ export default function PredictionResult({
   confidence,
 }: PredictionResultProps) {
   if (!predictedClass) {
-    return null;
+    return <div className="prediction-result"></div>;
   }
 
   return (

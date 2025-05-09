@@ -1,9 +1,6 @@
 import { useState, useRef } from "react";
 import { predictImage } from "../apis/predictImage";
-
-interface UploadAreaProps {
-  onPrediction: (predictedClass: string, confidence: string) => void;
-}
+import PredictionResult from "./PredictionResult";
 
 const exampleImages = [
   { filename: "apple.jpg", label: "Apple" },
@@ -21,11 +18,19 @@ const exampleImages = [
   { filename: "wheat.jpg", label: "Wheat" },
 ];
 
-export default function UploadArea({ onPrediction }: UploadAreaProps) {
+export default function UploadArea() {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [predictedClass, setPredictedClass] = useState("");
+  const [confidence, setConfidence] = useState("");
+
+  const handlePrediction = (predicted: string, confidence: string) => {
+    setPredictedClass(predicted);
+    setConfidence(confidence);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -42,9 +47,11 @@ export default function UploadArea({ onPrediction }: UploadAreaProps) {
   const handlePredict = async () => {
     if (!file) return;
     setLoading(true);
+    setPredictedClass("");
+    setConfidence("");
     try {
       const result = await predictImage(file);
-      onPrediction(result.predicted_class, result.confidence);
+      handlePrediction(result.predicted_class, result.confidence);
     } catch (error) {
       console.error("Prediction failed:", error);
       alert("Prediction failed. Try again.");
@@ -76,6 +83,11 @@ export default function UploadArea({ onPrediction }: UploadAreaProps) {
       <button className="button" onClick={handleUploadClick}>
         Upload Image
       </button>
+      <PredictionResult
+        predictedClass={predictedClass}
+        confidence={confidence}
+        loading={loading}
+      />
       <div className="preview-box">
         {previewUrl ? (
           <img src={previewUrl} alt="Preview" className="preview-image" />

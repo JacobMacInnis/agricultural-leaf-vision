@@ -28,6 +28,9 @@ MANIFEST
 
 data/raw/
 data/processed/
+data/processed_balanced/
+data/processed_healthy/
+data/final_data/
 models/
 
 # PyInstaller

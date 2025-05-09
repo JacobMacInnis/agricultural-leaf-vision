@@ -1,19 +1,9 @@
-import { useState } from "react";
 import UploadArea from "./components/UploadArea";
-import PredictionResult from "./components/PredictionResult";
 import ModelPerformance from "./components/ModelPerformance";
 import "./index.css";
 import ProjectInformation from "./components/ProjectInformation";
 
 function App() {
-  const [predictedClass, setPredictedClass] = useState("");
-  const [confidence, setConfidence] = useState("");
-
-  const handlePrediction = (predicted: string, confidence: string) => {
-    setPredictedClass(predicted);
-    setConfidence(confidence);
-  };
-
   return (
     <div className="container">
       <header className="intro-header">
@@ -38,12 +28,7 @@ function App() {
         </p>
       </header>
 
-      <UploadArea onPrediction={handlePrediction} />
-
-      <PredictionResult
-        predictedClass={predictedClass}
-        confidence={confidence}
-      />
+      <UploadArea />
 
       <hr className="divider" />
 

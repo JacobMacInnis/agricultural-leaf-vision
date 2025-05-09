@@ -1,7 +1,7 @@
 export default function ProjectInformation() {
   return (
     <div className="model-info-card">
-      <h2>About the Project 🧠</h2>
+      <h2>About the Project 🌿</h2>
       <ul>
         <li>
           <strong>Task:</strong> Image Classification of Plant Leaves
