@@ -73,6 +73,16 @@ export default function UploadArea() {
 
   return (
     <div className="card upload-area">
+      {loading ? (
+        <div className="loading-message">
+          🛠️ Starting the server... (cold start may take 30–45 seconds)
+        </div>
+      ) : (
+        <PredictionResult
+          predictedClass={predictedClass}
+          confidence={confidence}
+        />
+      )}
       <input
         type="file"
         accept="image/*"
@@ -83,11 +93,6 @@ export default function UploadArea() {
       <button className="button" onClick={handleUploadClick}>
         Upload Image
       </button>
-      <PredictionResult
-        predictedClass={predictedClass}
-        confidence={confidence}
-        loading={loading}
-      />
       <div className="preview-box">
         {previewUrl ? (
           <img src={previewUrl} alt="Preview" className="preview-image" />
@@ -102,12 +107,6 @@ export default function UploadArea() {
       >
         {loading ? "Predicting..." : "Predict"}
       </button>
-
-      {loading && (
-        <div className="loading-message">
-          🛠️ Starting the server... (cold start may take 30–45 seconds)
-        </div>
-      )}
 
       <div className="example-images">
         <h3>Or Try an Example Image:</h3>
